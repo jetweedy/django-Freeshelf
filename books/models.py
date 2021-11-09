@@ -9,7 +9,6 @@ class Book(models.Model):
     url = models.URLField(max_length=100, null=True, blank=True)
     created_at = models.DateField(null=True, editable=False, blank=True, auto_now_add=True)
 
-
 class User(AbstractUser):
     def __repr__(self):
         return f"<User username={self.username}>"
