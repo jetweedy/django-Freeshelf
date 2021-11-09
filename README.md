@@ -2,6 +2,9 @@
 
 This week, you are building a Django application to collect an index of free programming books online. You'll work on this application for the entire week. The end goal is an application that allows users to see a list of all the books, register and log in, and favorite books.
 
+## *NOTES*
+The 'Books' class in models.py should be singular (it's about what a 'Book' is, not a collection of 'Books', and it's inconsistent with 'User' right above it.). I changed this and modified relevant code throughout that conflicted with the change.
+
 ## *RESOURCES*
 Many-to-one models (field in row refers to another db entity)
 https://docs.djangoproject.com/en/3.2/topics/db/examples/many_to_one/

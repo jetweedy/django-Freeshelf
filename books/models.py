@@ -9,9 +9,13 @@ class User(AbstractUser):
     def __str__(self):
         return self.username
 
-class Books(models.Model):
+class Book(models.Model):
     title = models.CharField(max_length=255)
     author_name = models.CharField(max_length=255, null=True, blank=True)
     description = models.CharField(max_length=355)
     url = models.URLField(max_length=100, null=True, blank=True)
     created_at = models.DateField(null=True, editable=False, blank=True, auto_now_add=True)
+
+class FavoriteBooks(models.Model):
+    user = models.ManyToManyField(User)
+    book = models.ManyToManyField(Book)

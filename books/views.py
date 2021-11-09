@@ -1,13 +1,13 @@
 from django.shortcuts import render, redirect
 from .forms import BookForm
 
-from books.models import Books
+from books.models import Book
 
 # Create your views here.
 
 
 def list_books(request):
-    book = Books.objects.all().order_by("title")
+    book = Book.objects.all().order_by("title")
     return render(request, "books/list_books.html", {"book": book})
 
 
