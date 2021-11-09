@@ -2,6 +2,23 @@
 
 This week, you are building a Django application to collect an index of free programming books online. You'll work on this application for the entire week. The end goal is an application that allows users to see a list of all the books, register and log in, and favorite books.
 
+## *TO DO*
+ - Create User Favorites Many-to-Many Relationship
+ - Route to handle toggling User Favoriting
+ - Create a route to show only favorited books
+
+ - Create Category Model
+ 	- Title
+ 	- Slug
+ 	- Category? (see below)
+ - Create Category-Book Relationship 
+ 	- Ideally many-to-many
+ - Modify book listing to show category/ies, too
+ 	- Maybe move this somewhere else?
+ 	- Maybe have a search page?
+
+
+
 ## Requirements and goals
 
 ### Overall requirements
