@@ -22,5 +22,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path('accounts/', include('registration.backends.simple.urls')),
     path('books/add_book/', books_views.add_book, name='add_book'),
+    path('books/favorites/', books_views.favorite_books, name='favorite_books'),
+    path('books/favorites/remove/<int:book_id>', books_views.remove_favorite, name='remove_favorite'),
+    path('books/favorites/add/<int:book_id>', books_views.add_favorite, name='add_favorite'),
 ]
 

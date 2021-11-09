@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
 
 <div>
-    <h1>list_books</h1>
+    <h1>Books</h1>
     <form action="{% url 'add_book'%}" method="POST">
         {% csrf_token %} {{ form.as_p }}
         <div id="add-button">
@@ -18,8 +18,18 @@
         <h3>Added to List: {{ book.created_at }}</h3>
         <h4>Description: {{ book.description }}</h4>
         <h4>URL: {{book.url }}</h4>
-        {% endfor %}
+        {% if request.user.id != None %}
+        <div class="controls">
+            {% if book in favorites %}
+                <a href='/books/favorites/remove/{{book.id}}'>[X] Remove from Favorites</a>
+            {% else %}
+                <a href='/books/favorites/add/{{book.id}}'>[+] Add to Favorites</a>
+            {% endif %}
+        </div>
+        {% endif %}
+        <hr />
     </div>
+    {% endfor %}
 </div>
 
 {% endblock%}
