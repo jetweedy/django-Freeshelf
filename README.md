@@ -2,6 +2,16 @@
 
 This week, you are building a Django application to collect an index of free programming books online. You'll work on this application for the entire week. The end goal is an application that allows users to see a list of all the books, register and log in, and favorite books.
 
+## *RESOURCES*
+Many-to-one models (field in row refers to another db entity)
+https://docs.djangoproject.com/en/3.2/topics/db/examples/many_to_one/
+
+Many-to-many models (fields in row refer to two other DB entities for linkage)
+https://docs.djangoproject.com/en/3.2/topics/db/examples/many_to_many/
+
+Referencing the built-in User model:
+https://learndjango.com/tutorials/django-best-practices-referencing-user-model
+
 ## *TO DO*
  - Create User Favorites Many-to-Many Relationship
  - Route to handle toggling User Favoriting
