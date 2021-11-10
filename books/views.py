@@ -11,10 +11,10 @@ from books.models import Book, User
 #### https://pythonprogramming.net/user-registration-django-tutorial/
 #### https://docs.djangoproject.com/en/3.2/topics/auth/default/
 #### ------------------------------------------------------------------------
+#from django.contrib.auth import get_user_model
+#User = get_user_model()
 from .forms import SignupForm
 from django.contrib.auth import logout, authenticate, login
-from django.contrib.auth import get_user_model
-User = get_user_model()
 
 
 def login_custom(request):
@@ -37,7 +37,7 @@ def register(request):
             user = form.save()
             username = form.cleaned_data.get('username')
             login(request, user)
-            return redirect("/")
+            return redirect("/register")
         else:
             for msg in form.error_messages:
                 print(form.error_messages[msg])
