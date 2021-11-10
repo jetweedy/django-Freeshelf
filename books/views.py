@@ -9,6 +9,7 @@ from books.models import Book, User
 #### ------------------------------------------------------------------------
 #### Registration stuff
 #### https://pythonprogramming.net/user-registration-django-tutorial/
+#### https://docs.djangoproject.com/en/3.2/topics/auth/default/
 #### ------------------------------------------------------------------------
 from .forms import SignupForm
 from django.contrib.auth import logout, authenticate, login
