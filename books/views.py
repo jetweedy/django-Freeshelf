@@ -15,23 +15,37 @@ from books.models import Book, User
 #User = get_user_model()
 from .forms import SignupForm
 from django.contrib.auth import logout, authenticate, login
-
+from django.contrib.auth.forms import AuthenticationForm
 
 def login_custom(request):
-    user = authenticate(username='johann', password='tweedlemeister')
-    if user is not None:
-        login(request, user)
-        return HttpResponse("Logged in!")
+    if request.method == "GET":
+        form = AuthenticationForm()
+        return render(request = request,
+                      template_name = "login.html",
+                      context={"form":form})
     else:
-        return HttpResponse("Not logged in.")
+        user = authenticate(request, username=request.POST['username'], password=request.POST['password'])        
+        if (user != None):
+            login(request, user)
+            return HttpResponseRedirect("/")
+        else:
+            form = AuthenticationForm()
+            return render(request = request,
+                      template_name = "login.html",
+                      context={"form":form, "custom_error":"User not found. Please try again."})
+
 
 def logout_custom(request):
     logout(request)
-    return HttpResponse("Logged out!")
-#    return redirect("")
+    return redirect("/")
 
 def register(request):
-    if request.method == "POST":
+    if request.method == "GET":
+        form = SignupForm
+        return render(request = request,
+                      template_name = "register.html",
+                      context={"form":form})
+    else:
         form = SignupForm(request.POST)
         if form.is_valid():
             user = form.save()
@@ -44,12 +58,7 @@ def register(request):
             return render(request = request,
                           template_name = "register.html",
                           context={"form":form})
-    else:
-        form = SignupForm
-        return render(request = request,
-                      template_name = "register.html",
-                      context={"form":form})
-# Create your views here.
+
 #### ------------------------------------------------------------------------
 
 
