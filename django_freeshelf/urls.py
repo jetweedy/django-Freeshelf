@@ -1,18 +1,7 @@
-"""django_freeshelf URL Configuration
 
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/3.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
+#### Resource for customizing registration:
+## https://pythonprogramming.net/user-registration-django-tutorial/
+
 from django.contrib import admin
 from django.urls import path, include
 from books import views as books_views
@@ -25,5 +14,10 @@ urlpatterns = [
     path('books/favorites/', books_views.favorite_books, name='favorite_books'),
     path('books/favorites/remove/<int:book_id>', books_views.remove_favorite, name='remove_favorite'),
     path('books/favorites/add/<int:book_id>', books_views.add_favorite, name='add_favorite'),
+
+    path("login/", books_views.login_custom),
+    path("logout/", books_views.logout_custom),
+    path("register/", books_views.register),
+
 ]
 

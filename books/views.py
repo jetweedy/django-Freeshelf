@@ -6,13 +6,59 @@ from django.http import HttpResponseRedirect
 
 from books.models import Book, User
 
+#### ------------------------------------------------------------------------
+#### Registration stuff
+#### https://pythonprogramming.net/user-registration-django-tutorial/
+#### ------------------------------------------------------------------------
+from .forms import SignupForm
+from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth import get_user_model
+User = get_user_model()
+
+
+def login_custom(request):
+    user = authenticate(username='johann', password='tweedlemeister')
+    if user is not None:
+        login(request, user)
+        return HttpResponse("Logged in!")
+    else:
+        return HttpResponse("Not logged in.")
+
+def logout_custom(request):
+    logout(request)
+    return HttpResponse("Logged out!")
+#    return redirect("")
+
+def register(request):
+    if request.method == "POST":
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            username = form.cleaned_data.get('username')
+            login(request, user)
+            return redirect("/")
+        else:
+            for msg in form.error_messages:
+                print(form.error_messages[msg])
+            return render(request = request,
+                          template_name = "register.html",
+                          context={"form":form})
+    else:
+        form = SignupForm
+        return render(request = request,
+                      template_name = "register.html",
+                      context={"form":form})
 # Create your views here.
+#### ------------------------------------------------------------------------
 
 
 def list_books(request):
     books = Book.objects.all().order_by("title")
-    user = User.objects.get(id=request.user.id)
-    favorites = user.favorite_books.all()
+    if (request.user.id != None):
+        user = User.objects.get(id=request.user.id)
+        favorites = user.favorite_books.all()
+    else:
+        favorites = []
     return render(request, "books/list_books.html", {"book": books, "favorites":favorites})
 
 def favorite_books(request):
